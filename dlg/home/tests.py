@@ -7,7 +7,7 @@ import json
 class IntegrationTestCase(TestCase):
     """
     A series of Integration test cases which utilize POST
-    to access the API
+    to access the API and verify the end result
     """
     def setUp(self):
         """
@@ -22,10 +22,10 @@ class IntegrationTestCase(TestCase):
         c = self.client
         test_dict = {"numbers_to_add": numbers_list}
         # print(test_dict)
-        response = c.post('/calculate_total',
+        response = c.post('/total',
                             test_dict,
                             format='json',
-                            content_type="application/json")
+                            content_type='application/json')
         try:
             print(json.loads(response.content)["msg"])
         except:
@@ -42,7 +42,7 @@ class IntegrationTestCase(TestCase):
         """
         c = self.client
         test_dict = {'numbers_to_add': numbers_list}
-        response = c.post('/calculate_total', test_dict, format='json')
+        response = c.post('/total', test_dict, format='json')
         self.assertEqual(response.status_code, http_response_code)
         # print(test_dict)
         # print(json.loads(response.content)["msg"])
@@ -109,21 +109,22 @@ class IntegrationTestCase(TestCase):
     def test_incorrect_method(self):
         """
         API requires POST, send by GET instead
+        Verify 405 error
         """
         c = self.client
         numbers_list = [0, 1, 2, 3, 4]
         test_dict = {'numbers_to_add': numbers_list}
-        response = c.get('/calculate_total', test_dict, format='json')
+        response = c.get('/total', test_dict, format='json')
         self.assertEqual(response.status_code, 405)
 
     def test_missing_post_field(self):
         """
-        Does not send the numbers_to_add field
+        Do not send the numbers_to_add field and confirm error
         """
         c = self.client
         numbers_list = [0, 1, 2, 3, 4]
         test_dict = {'incorrect_field_name': numbers_list}
-        response = c.post('/calculate_total', test_dict, format='json')
+        response = c.post('/total', test_dict, format='json')
         self.assertEqual(response.status_code, 400)
 
     def test_non_list(self):
@@ -133,7 +134,7 @@ class IntegrationTestCase(TestCase):
         c = self.client
         numbers_list = 4
         test_dict = {'incorrect_field_name': numbers_list}
-        response = c.post('/calculate_total', test_dict, format='json')
+        response = c.post('/total', test_dict, format='json')
         self.assertEqual(response.status_code, 400)
 
 
@@ -193,4 +194,4 @@ class UnitTestCase(TestCase):
 
 
 # TODO - Other things to consider
-# Decimals, limits of ieee precision
+# Decimals, limits of ieee precision, edge cases

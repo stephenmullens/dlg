@@ -11,7 +11,7 @@ def index_home(request):
     return HttpResponse(status=404)
 
 
-def calculate_total(request):
+def total(request):
     """
     Input: POST "numbers_to_add"
     Output: JSONResponse with the sum of the list or Error
