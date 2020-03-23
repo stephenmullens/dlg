@@ -1,18 +1,22 @@
 # DLG
 
 A REST endpoint that return the sum of a list of numbers e.g. [1, 2, 3] => 1+2+3 = 6.
+
 The request should be made by POST, and send a JSON object containing the list.
 
 Request (POST):
+```
 	{"numbers_to_add": [1, 2, 3}
 	content_type='application/json'
 	http://localhost:8000/total
+```
 
 Response:
+```
 	{
 		"total": 6
 	}
-
+```
 
 ## Assumptions / Limitations:
 This program is not designed to deal with complex or Python Decimal numbers.
