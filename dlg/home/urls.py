@@ -5,5 +5,4 @@ urlpatterns = [
     path('', views.index_home, name='index_home'),
     path('total', views.total, name='total'),
 
-
 ]

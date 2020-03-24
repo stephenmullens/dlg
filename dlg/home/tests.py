@@ -1,8 +1,6 @@
 from django.test import TestCase, Client
 from .utils import clean_number_list
 
-import json
-
 
 class IntegrationTestCase(TestCase):
     """
@@ -26,10 +24,10 @@ class IntegrationTestCase(TestCase):
                             test_dict,
                             format='json',
                             content_type='application/json')
-        try:
-            print(json.loads(response.content)["msg"])
-        except:
-            pass
+        # try:
+        #     print(json.loads(response.content)["msg"])
+        # except:
+        #     pass
         self.assertEqual(response.status_code,
                         http_response_code,
                         "Incorrect error code returned")

@@ -1,8 +1,9 @@
 def clean_number_list(numbers_to_add):
     """
     Input: a List of numbers to be added together
-    Clean the list and then return the new list
-    Function will return False if an error has been found
+    Function will clean the list and then return the new list.
+    Cleaning involves conversion of string to numbers
+    Function will return False if an invalid value has been found
     """
 
     # Verify that the input is a list
@@ -19,7 +20,9 @@ def clean_number_list(numbers_to_add):
                 try:
                     float_value = float(item)
                     numbers_to_add_list.append(float_value)
-                except:
+                except Exception as e:
+                    # print(type(e))
+                    # TODO # Print to log file
                     return False
         if isinstance(item, (int, float)):
             numbers_to_add_list.append(item)

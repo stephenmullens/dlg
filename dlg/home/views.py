@@ -22,6 +22,7 @@ def total(request):
             json_body = json.loads(request.body)
         except Exception as e:
             # print(type(e))
+            # TODO # Print to log file
             return JsonResponse({"status": "error",
                                 "msg": "\"numbers_to_add\" is invalid"},
                                 safe=False, status=400)
@@ -47,7 +48,7 @@ def total(request):
         # Clean the numbers_to_add list, and return error if necessary
         numbers_to_add_list = clean_number_list(numbers_to_add)
         if numbers_to_add_list is False:
-           return JsonResponse({"status": "error",
+            return JsonResponse({"status": "error",
                     "msg": "\"numbers_to_add\" contains invalid values"},
                     safe=False, status=400)
 
@@ -55,7 +56,8 @@ def total(request):
         sum_of_numbers = sum(numbers_to_add_list)
 
         # Return the total
-        return JsonResponse({"total": str(sum_of_numbers)}, safe=False, status=200)
+        return JsonResponse({"total": str(sum_of_numbers)},
+                            safe=False, status=200)
 
     else:
         return HttpResponse(status=405)
