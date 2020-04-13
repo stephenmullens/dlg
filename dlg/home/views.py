@@ -52,8 +52,18 @@ def total(request):
                     "msg": "\"numbers_to_add\" contains invalid values"},
                     safe=False, status=400)
 
+
         # Sum the list of numbers together
         sum_of_numbers = sum(numbers_to_add_list)
+
+
+        # Multiplication of the numbers together
+        # [0, 1, 4, 6.3]
+        # Need to rework variable names, test cases and use the below
+        # multiply_values = 1
+        # for item in numbers_to_add_list:
+        #     multiply_values = multiply_values * item
+
 
         # Return the total
         return JsonResponse({"total": str(sum_of_numbers)},
